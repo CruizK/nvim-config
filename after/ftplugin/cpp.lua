@@ -1,0 +1,5 @@
+vim.keymap.set('n', '<leader>cmg', ':CMakeGenerate<CR>')
+vim.keymap.set('n', '<leader>cmr', ':CMakeRun<CR>')
+vim.keymap.set('n', '<leader>cmb', ':CMakeBuild<CR>')
+vim.keymap.set('n', '<leader>cmd', ':CMakeDebug<CR>')
+vim.keymap.set('v', '<leader>dcf', ":'<,'>TSCppDefineClassFunc<CR>")
