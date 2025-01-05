@@ -33,16 +33,16 @@ return {
                 callback = function(args)
                     local client = vim.lsp.get_client_by_id(args.data.client_id)
                     if not client then return end
-                    local map = function(keys, func)
-                        vim.keymap.set('n', keys, func, { buffer = args.buf })
+                    local map = function(keys, func, desc)
+                        vim.keymap.set('n', keys, func, { buffer = args.buf, desc = "LSP: " .. desc })
                     end
 
-                    map('gd', vim.lsp.buf.definition)
-                    map('gr', vim.lsp.buf.references)
-                    map('gi', vim.lsp.buf.implementation)
-                    map('vrn', vim.lsp.buf.rename)
-                    map('vca', vim.lsp.buf.code_action)
-                    map('K', vim.lsp.buf.hover)
+                    map('gd', vim.lsp.buf.definition, "[G]oto [D]efinition")
+                    map('gr', vim.lsp.buf.references, "[G]oto [R]references")
+                    map('gi', vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+                    map('vrn', vim.lsp.buf.rename, "[v] [R]e [N]ame")
+                    map('vca', vim.lsp.buf.code_action, "[v] [C]ode [A]ction")
+                    map('K', vim.lsp.buf.hover, "Hover")
 
                     -- This will highlight all instances of a symbol when you keep your cursor
                     -- there for an extended preiod of time & then clear on move
@@ -60,7 +60,7 @@ return {
                     if client.name == 'clangd' then
                         map('<leader>o', function()
                             vim.cmd('ClangdSwitchSourceHeader')
-                        end)
+                        end, "Switch Header")
                     end
 
 
