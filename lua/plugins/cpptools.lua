@@ -1,4 +1,4 @@
 return {
-    "Badhi/nvim-treesitter-cpp-tools",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+  "Badhi/nvim-treesitter-cpp-tools",
+  dependencies = { "nvim-treesitter/nvim-treesitter" },
 }
