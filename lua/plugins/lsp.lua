@@ -5,6 +5,7 @@ return {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'saghen/blink.cmp',
+      'Hoffs/omnisharp-extended-lsp.nvim',
       {
         "folke/lazydev.nvim",
         ft = "lua", -- only load on lua files
@@ -26,6 +27,30 @@ return {
       require("lspconfig").lua_ls.setup { capabilities = capabilities }
       require("lspconfig").clangd.setup { capabilities = capabilities }
       require("lspconfig").pyright.setup { capabilities = capabilities }
+
+      -- Only setup on windows machine
+      if vim.fn.has("win32") then
+        local omnisharp_bin = "C:\\omnisharp\\OmniSharp.exe"
+        local pid = vim.fn.getpid()
+        require("lspconfig").omnisharp.setup {
+          cmd = {
+            omnisharp_bin,
+            "--languageserver",
+            "--hostPID",
+            tostring(pid)
+          },
+          handlers = { ['textDocument/definition'] = require('omnisharp_extended').handler },
+          capabilities = capabilities,
+          settings = {
+            FormattingOptions = {
+              OrganizeImports = true
+            },
+            RoslynExtensionsOptions = {
+              EnableAnalyzersSupport = true
+            }
+          }
+        }
+      end
 
 
       vim.api.nvim_create_autocmd("LspAttach", {

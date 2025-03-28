@@ -1,7 +1,7 @@
 return {
   'kristijanhusak/vim-dadbod-ui',
   dependencies = {
-    { dir = '~/dev/vim-dadbod', lazy = true },
+    { 'tpope/vim-dadbod', lazy = true },
   },
   cmd = {
     'DBUI',
