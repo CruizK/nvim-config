@@ -3,7 +3,7 @@ return {
   dependencies = {
     { "nvim-tree/nvim-web-devicons", opts = {} }
   },
-  opts = {},   -- for default options, refer to the configuration section for custom setup.
+  opts = {}, -- for default options, refer to the configuration section for custom setup.
   cmd = "Trouble",
   keys = {
     {
