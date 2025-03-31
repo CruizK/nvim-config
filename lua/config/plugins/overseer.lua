@@ -10,14 +10,23 @@ M.in_transformer = function(search)
   return files.is_subpath(root, search.dir)
 end
 
+--- @param dir string Any directory inside transformer repo worktree
+--- @returns string[]
+M.list_projects = function(dir)
+  local git_root = utils.get_git_root(dir)
+  local projects_root = files.join(git_root, "projects")
+  local projects = utils.list_dirs(projects_root)
+  return vim.tbl_map(function(project)
+    return files.join(projects_root, project)
+  end, projects)
+end
+
 --- @param search overseer.SearchCondition
---- @param project_root string
 --- @param projects string[]
 --- @returns boolean
-M.in_project_dir = function(search, project_root, projects)
+M.in_project_dir = function(search, projects)
   for _, project in ipairs(projects) do
-    local project_dir = files.join(project_root, project)
-    if files.is_subpath(project_dir, search.dir) then
+    if files.is_subpath(project, search.dir) then
       return true
     end
   end
@@ -43,6 +52,7 @@ M.pdm_tasks = function()
           }
         end
       }
+
       table.insert(tasks, pdm_sync)
       cb(tasks)
     end,
@@ -59,16 +69,10 @@ M.dbt_tasks = function()
     generator = function(search, cb)
       --- @type overseer.TemplateDefinition[]
       local tasks = {}
-      local git_root = utils.get_git_root(search.dir)
-      local projects_root = files.join(git_root, "projects")
-      local projects = utils.list_dirs(projects_root)
-      if projects == nil then
-        cb({})
-        return
-      end
+      local projects = M.list_projects(search.dir)
 
       local function condition_cb(task_search)
-        return M.in_project_dir(task_search, projects_root, projects)
+        return M.in_project_dir(task_search, projects)
       end
       --- @type overseer.TemplateDefinition
       local dbt_run_task = {

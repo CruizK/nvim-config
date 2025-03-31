@@ -59,7 +59,7 @@ end
 
 --- Returns dirs
 --- @param dir string
---- @return ?string[]
+--- @return string[]
 M.list_dirs = function(dir)
   local fd = vim.uv.fs_opendir(dir)
 
