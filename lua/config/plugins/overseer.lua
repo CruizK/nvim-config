@@ -128,4 +128,22 @@ M.dbt_tasks = function()
   return dbt_template
 end
 
+M.zig_tasks = function()
+  --- @type overseer.TemplateDefinition
+  local zig_tasks = {
+    name = "zig test",
+    builder = function()
+      local file = vim.fn.expand("%:p")
+      return {
+        cmd = { "zig", "test" },
+        args = { file }
+      }
+    end,
+    condition = {
+      filetype = { "zig" }
+    }
+  }
+  return zig_tasks
+end
+
 return M

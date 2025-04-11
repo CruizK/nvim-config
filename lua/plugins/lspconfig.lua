@@ -28,6 +28,17 @@ return {
       require("lspconfig").lua_ls.setup { capabilities = capabilities }
       require("lspconfig").clangd.setup { capabilities = capabilities }
       require("lspconfig").pyright.setup { capabilities = capabilities }
+      vim.g.zig_fmt_parse_errors = 0
+      vim.g.zig_fmt_autosave = 0
+      require("lspconfig").zls.setup {
+        capabilities = capabilities,
+        settings = {
+          zls = {
+            enable_build_on_save = true,
+            build_on_save_step = "check"
+          }
+        }
+      }
 
       -- Only setup on windows machine
       if vim.fn.has("win32") then

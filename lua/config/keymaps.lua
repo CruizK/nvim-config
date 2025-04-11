@@ -6,6 +6,15 @@ set('i', '<Right>', '<Nop>')
 set('i', '<Up>', '<Nop>')
 set('i', '<Down>', '<Nop>')
 
+
+-- Stop Yeeting my shit into the register
+set('n', 'x', '"_x')
+set('n', 'd', '"_d')
+set('n', 'D', '"_D')
+set('v', 'd', '"_d')
+
+set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
 -- Move selection up and down
 set('v', 'K', ":m '<-2<CR>gv=gv", { desc = "Move selected line up" })
 set('v', 'J', ":m '>+1<CR>gv=gv", { desc = "Move selected line down" })

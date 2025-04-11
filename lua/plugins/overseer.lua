@@ -16,6 +16,9 @@ return {
       overseer.register_template(
         overseer_config.pdm_tasks()
       )
+      overseer.register_template(
+        overseer_config.zig_tasks()
+      )
     end
 
     vim.keymap.set('n', '<leader>osr', '<cmd>OverseerRun<CR>')

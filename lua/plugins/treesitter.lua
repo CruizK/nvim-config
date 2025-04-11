@@ -16,6 +16,7 @@ return {
           "query",
           "markdown",
           "markdown_inline",
+          "zig",
           "c_sharp"
         },
         auto_install = false,
