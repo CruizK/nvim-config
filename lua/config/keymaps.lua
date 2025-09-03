@@ -7,11 +7,8 @@ set('i', '<Up>', '<Nop>')
 set('i', '<Down>', '<Nop>')
 
 
--- Stop Yeeting my shit into the register
-set('n', 'x', '"_x')
-set('n', 'd', '"_d')
-set('n', 'D', '"_D')
-set('v', 'd', '"_d')
+set('n', '<M-j>', '<cmd>cnext<CR>')
+set('n', '<M-k>', '<cmd>cprev<CR>')
 
 set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 

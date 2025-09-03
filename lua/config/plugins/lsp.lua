@@ -1,29 +1,5 @@
 local M = {}
 
---- @param capabilities lsp.ClientCapabilities
-M.omnisharp_setup = function(capabilities)
-  local omnisharp_bin = "C:\\omnisharp\\OmniSharp.exe"
-  local pid = vim.fn.getpid()
-  require("lspconfig").omnisharp.setup {
-    cmd = {
-      omnisharp_bin,
-      "--languageserver",
-      "--hostPID",
-      tostring(pid)
-    },
-    handlers = { ['textDocument/definition'] = require('omnisharp_extended').handler },
-    capabilities = capabilities,
-    settings = {
-      FormattingOptions = {
-        OrganizeImports = true
-      },
-      RoslynExtensionsOptions = {
-        EnableAnalyzersSupport = true
-      }
-    }
-  }
-end
-
 --- @param args vim.api.keyset.create_autocmd.callback_args
 M.on_attach = function(args)
   local client = vim.lsp.get_client_by_id(args.data.client_id)

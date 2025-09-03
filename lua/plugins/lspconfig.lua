@@ -5,7 +5,6 @@ return {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'saghen/blink.cmp',
-      'Hoffs/omnisharp-extended-lsp.nvim',
       {
         "folke/lazydev.nvim",
         ft = "lua", -- only load on lua files
@@ -21,13 +20,9 @@ return {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup {
-        ensure_installed = { "lua_ls", "clangd", "pyright" },
-        automatic_installation = false
+        ensure_installed = { "lua_ls", "clangd", "pyright", "zls" },
       }
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-      require("lspconfig").lua_ls.setup { capabilities = capabilities }
-      require("lspconfig").clangd.setup { capabilities = capabilities }
-      require("lspconfig").pyright.setup { capabilities = capabilities }
       vim.g.zig_fmt_parse_errors = 0
       vim.g.zig_fmt_autosave = 0
       require("lspconfig").zls.setup {
@@ -39,11 +34,6 @@ return {
           }
         }
       }
-
-      -- Only setup on windows machine
-      if vim.fn.has("win32") then
-        require("config.plugins.lsp").omnisharp_setup(capabilities)
-      end
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),

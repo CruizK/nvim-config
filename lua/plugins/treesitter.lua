@@ -17,9 +17,16 @@ return {
           "markdown",
           "markdown_inline",
           "zig",
-          "c_sharp"
+          "c_sharp",
+          "astro",
+          "javascript",
+          "typescript"
         },
         auto_install = false,
+        indent = {
+          enable = true,
+          disable = { "python" }
+        },
         highlight = {
           enable = true,
           -- Disable for lage files
